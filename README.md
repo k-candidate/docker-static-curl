@@ -1,11 +1,6 @@
 # docker-static-curl
 
-A minimal Docker image containing only a statically compiled curl binary.
-
-## Features
-- Based on scratch image
-- Contains only statically compiled curl binary
-- Minimal image size
+A Distroless image containing only a statically compiled curl binary.
 
 ## Build
 
@@ -19,12 +14,7 @@ docker build --no-cache -t static-curl .
 docker run --rm static-curl https://httpbin.org/get
 ```
 
-## Example
-```bash
-# GET request
-docker run --rm static-curl -s https://api.github.com
-
-# POST request
-docker run --rm static-curl -X POST -H "Content-Type: application/json" \
-  -d '{"key":"value"}' https://api.example.com
-```
+TODO
+[ ] Parameterize the curl version. Tag the image accordingly.
+[ ] GH Action for PRs: builds, tests, but does not push the image.
+[ ] Multi-arch.
