@@ -14,7 +14,7 @@ docker build --no-cache -t static-curl .
 docker run --rm static-curl https://httpbin.org/get
 ```
 
-TODO
-[ ] Parameterize the curl version. Tag the image accordingly.
-[ ] GH Action for PRs: builds, tests, but does not push the image.
-[ ] Multi-arch.
+## TODO
+- [ ] Parameterize the curl version. Tag the image accordingly.
+- [ ] GH Action for PRs: builds, tests, but does not push the image.
+- [ ] Multi-arch.
