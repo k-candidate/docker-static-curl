@@ -1,5 +1,7 @@
 FROM alpine:3.22 AS builder
 
+ARG VERSION
+
 # Install build dependencies
 RUN apk add --no-cache \
     build-base \
@@ -9,7 +11,7 @@ RUN apk add --no-cache \
 
 # Download and extract curl source
 WORKDIR /tmp
-RUN wget -O curl.tar.gz https://curl.se/download/curl-8.16.0.tar.gz \
+RUN wget -O curl.tar.gz https://curl.se/download/curl-${VERSION}.tar.gz \
     && tar -xzf curl.tar.gz \
     && mv ./curl-* ./src
 
@@ -60,6 +62,6 @@ RUN ldd ./src/curl && exit 1 || true
 
 # Create final minimal image
 FROM gcr.io/distroless/static:nonroot
-COPY --from=builder /tmp/src/src/curl /curl
-ENTRYPOINT ["/curl"]
+COPY --from=builder /tmp/src/src/curl /bin/curl
+ENTRYPOINT ["/bin/curl"]
 CMD ["--help"]
