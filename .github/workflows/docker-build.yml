@@ -30,6 +30,8 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            VERSION=${{{ github.event.inputs.VERSION }}}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:${{ github.event.inputs.VERSION }}
