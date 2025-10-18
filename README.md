@@ -33,6 +33,5 @@ CMD ["my-statically-linked-bin"]
 ```
 
 ## TO DO
-- [ ] Parameterize the curl version. Tag the image accordingly.
 - [ ] GH Action for PRs: builds, tests, but does not push the image.
 - [ ] Multi-arch.
