@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Push, and Test Docker Image
 
 on:
   workflow_dispatch:  
@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -36,3 +39,11 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:${{ github.event.inputs.VERSION }}
+
+      - name: Test curl on amd64
+        run: |
+          docker run --rm --platform linux/amd64 ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:${{ github.event.inputs.VERSION }} --version
+
+      - name: Test curl on arm64
+        run: |
+          docker run --rm --platform linux/arm64 ${{ secrets.DOCKERHUB_USERNAME }}/static-curl:${{ github.event.inputs.VERSION }} --version

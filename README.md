@@ -1,6 +1,6 @@
 # docker-static-curl
 
-A Distroless image containing only a statically compiled curl binary.
+A Multi-Arch (`amd64` and `arm64`) Distroless image containing only a statically compiled curl binary.
 
 ## Build
 
@@ -23,15 +23,12 @@ FROM kcandidate/static-curl AS curl
 # Runtime image
 FROM gcr.io/distroless/static:nonroot
 
-# Copy /etc/ssl/certs/ca-certificates.crt (Debian like) 
-# or /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem (Fedora like)
+# Copy /etc/ssl/certs/ca-certificates.crt (Debian like) \
+# or /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem (Fedora like) \
+# if using private CA
 
 # Copy static curl for health checks
 COPY --from=curl /bin/curl /usr/bin/curl
 
 CMD ["my-statically-linked-bin"]
 ```
-
-## TO DO
-- [ ] GH Action for PRs: builds, tests, but does not push the image.
-- [ ] Multi-arch.
