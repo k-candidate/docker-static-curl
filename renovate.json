@@ -1,21 +1,12 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["^curl-version\\.txt$"],
-      "matchStrings": ["^(?<currentValue>\\d+\\.\\d+\\.\\d+)$"],
+      "managerFilePatterns": ["curl-version.txt"],
+      "matchStrings": ["^(?<currentValue>curl-\\d+_\\d+_\\d+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "curl/curl",
-      "versioningTemplate": "semver",
-      "allowedVersions": "^\\d+\\.\\d+\\.\\d+$"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchManagers": ["*"],
-      "groupName": "dependencies"
+      "versioningTemplate": "regex:^curl-(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$"
     }
   ]
 }
