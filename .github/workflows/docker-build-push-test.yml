@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       VERSION:
-        description: 'curl version override'
+        description: 'curl version (Major.Minor.Patch) override'
         required: false
         default: ''
 
@@ -29,7 +29,13 @@ jobs:
           if [ -n "${{ github.event.inputs.VERSION }}" ]; then
             VERSION="${{ github.event.inputs.VERSION }}"
           else
-            VERSION="$(cat curl-version.txt)"
+            RAW_VERSION="$(cat curl-version.txt)"
+            if [[ "$RAW_VERSION" =~ ^curl-([0-9]+)_([0-9]+)_([0-9]+)$ ]]; then
+              VERSION="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+            else
+              echo "Error: Invalid curl-version.txt format: $RAW_VERSION" >&2
+              exit 1
+            fi
           fi
           echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
