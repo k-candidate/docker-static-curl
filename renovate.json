@@ -5,7 +5,7 @@
       "customType": "regex",
       "managerFilePatterns": ["curl-version.txt"],
       "matchStrings": ["^(?<currentValue>\\d+\\.\\d+\\.\\d+)$"],
-      "datasourceTemplate": "github-releases",
+      "datasourceTemplate": "github-tags",
       "depNameTemplate": "curl/curl",
       "versioningTemplate": "semver"
     }
