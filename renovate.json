@@ -3,10 +3,10 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["curl-version.txt"],
+      "managerFilePatterns": ["curl-version.txt"],
       "matchStrings": ["^(?<currentValue>\\d+\\.\\d+\\.\\d+)$"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "curl/curl", 
+      "depNameTemplate": "curl/curl",
       "versioningTemplate": "semver"
     }
   ]
