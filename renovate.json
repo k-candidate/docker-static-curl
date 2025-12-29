@@ -6,7 +6,7 @@
       "matchStrings": ["^(?<currentValue>curl-\\d+_\\d+_\\d+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "curl/curl",
-      "versioningTemplate": "regex"
+      "versioningTemplate": "regex:^curl-(\\d+_\\d+_\\d+)$"
     }
   ]
 }
