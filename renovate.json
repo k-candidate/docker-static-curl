@@ -6,8 +6,7 @@
       "matchStrings": ["^(?<currentValue>curl-(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "curl/curl",
-      "versioningTemplate": "regex",
-      "pinDigests": true
+      "versioningTemplate": "regex:^(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$"
     }
   ]
 }
