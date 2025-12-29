@@ -5,7 +5,8 @@
       "managerFilePatterns": ["curl-version.txt"],
       "matchStrings": ["^(?<currentValue>curl-\\d+_\\d+_\\d+)$"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "curl/curl"
+      "depNameTemplate": "curl/curl",
+      "versioningTemplate": "loose"
     }
   ]
 }
