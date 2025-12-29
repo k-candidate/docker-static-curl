@@ -4,9 +4,9 @@
       "customType": "regex",
       "managerFilePatterns": ["curl-version.txt"],
       "matchStrings": ["^(?<currentValue>curl-(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$)"],
-      "datasourceTemplate": "github-releases",
+      "datasourceTemplate": "github-tags",
       "depNameTemplate": "curl/curl",
-      "versioningTemplate": "regex:^(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$"
+      "versioningTemplate": "regex"
     }
   ]
 }
