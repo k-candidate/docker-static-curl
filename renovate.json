@@ -1,11 +1,10 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": ["curl-version.txt"],
-      "matchStrings": ["^(?<currentValue>\\d+\\.\\d+\\.\\d+)$"],
-      "datasourceTemplate": "github-tags",
+      "matchStrings": ["^(?<currentValue>curl-\\d+_\\d+_\\d+)$"],
+      "datasourceTemplate": "github-releases",
       "depNameTemplate": "curl/curl"
     }
   ]
