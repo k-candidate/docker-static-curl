@@ -4,7 +4,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["^curl-version\\.txt$"],
+      "fileMatch": ["^curl-version\\.txt$"],
       "matchStrings": ["^(?<currentValue>\\d+\\.\\d+\\.\\d+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "curl/curl",
@@ -13,8 +13,12 @@
   ],
   "packageRules": [
     {
-      "matchManagers": ["*"],
+      "matchManagers": ["dockerfile", "github-action"],
       "groupName": "dependencies"
+    },
+    {
+      "matchManagers": ["regex"],
+      "groupName": "curl"
     }
   ]
 }
