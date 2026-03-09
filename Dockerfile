@@ -50,6 +50,7 @@ RUN PKG_CONFIG="pkg-config --static" ./configure \
     --without-librtmp \
     --without-libssh2 \
     --without-nghttp2 \
+    --without-nghttp3 \
     --without-ntlm-auth \
     --without-brotli \
     --without-zlib \
