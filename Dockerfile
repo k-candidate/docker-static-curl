@@ -9,7 +9,7 @@ RUN apk add --no-cache \
     openssl-dev \
     openssl-libs-static \
     zlib-dev \
-    zlib-static\
+    zlib-static \
     pkgconfig
 
 # Download and extract curl source
@@ -20,6 +20,7 @@ RUN wget -O curl.tar.gz https://curl.se/download/curl-${VERSION}.tar.gz \
 
 # Build curl statically
 WORKDIR /tmp/src
+# Use LDFLAGS and CPPFLAGS in configure to ensure they propagate
 RUN ./configure \
     --disable-shared \
     --enable-static \
@@ -55,13 +56,14 @@ RUN ./configure \
     --without-nghttp2 \
     --without-ntlm-auth \
     --without-brotli \
-    --without-zlib \
-    --with-ssl && \
-    make -j$(nproc) V=1 CFLAGS="-static" LDFLAGS="-static -all-static" \
+    --with-zlib \
+    --with-ssl \
+    LDFLAGS="-static -all-static" \
+    CPPFLAGS="-static" \
     LIBS="-lssl -lcrypto -lz" && \
+    make -j$(nproc) && \
     strip ./src/curl
 
-# Verify static compilation
 RUN ldd ./src/curl && exit 1 || true
 
 # Create final minimal image
