@@ -6,7 +6,8 @@ ARG VERSION
 RUN apk add --no-cache \
     build-base \
     wget \
-    openssl-dev
+    openssl-dev \
+    openssl-libs-static
 
 # Download and extract curl source
 WORKDIR /tmp
@@ -16,7 +17,7 @@ RUN wget -O curl.tar.gz https://curl.se/download/curl-${VERSION}.tar.gz \
 
 # Build curl statically
 WORKDIR /tmp/src
-RUN ./configure \
+RUN PKG_CONFIG="pkg-config --static" ./configure \
     --disable-shared \
     --enable-static \
     --enable-dnsshuffle \
@@ -49,12 +50,11 @@ RUN ./configure \
     --without-librtmp \
     --without-libssh2 \
     --without-nghttp2 \
-    --without-nghttp3 \
     --without-ntlm-auth \
     --without-brotli \
     --without-zlib \
     --with-ssl && \
-    make -j$(nproc) V=1 LDFLAGS="-static -all-static" && \
+    make -j$(nproc) V=1 LDFLAGS="-static -all-static -L/usr/lib" && \
     strip ./src/curl
 
 # Verify static compilation
