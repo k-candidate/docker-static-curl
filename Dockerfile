@@ -7,7 +7,10 @@ RUN apk add --no-cache \
     build-base \
     wget \
     openssl-dev \
-    openssl-libs-static
+    openssl-libs-static \
+    zlib-dev \
+    zlib-static\
+    pkgconfig
 
 # Download and extract curl source
 WORKDIR /tmp
