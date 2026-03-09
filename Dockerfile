@@ -6,7 +6,7 @@ ARG VERSION
 RUN apk add --no-cache \
     build-base \
     wget \
-    openssl-dev \
+    openssl-dev
 
 # Download and extract curl source
 WORKDIR /tmp
